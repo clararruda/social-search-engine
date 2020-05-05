@@ -1,0 +1,17 @@
+{
+  "name": "react-back",
+  "version": "1.0.0",
+  "description": "back do projeto da cadeira react",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
+  },
+  "author": "shido, maria clara",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.19.2",
+    "express": "^4.17.1",
+    "se-scraper": "^1.5.7"
+  }
+}
