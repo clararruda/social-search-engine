@@ -23,7 +23,7 @@ class App extends Component{
             <Checkbox id='ckb-twitter' label='' defaultChecked />
           </label>
           <label id="pesquisa">
-            <Input icon='search' placeholder='Search...' />
+            <Input size='small' icon='search' placeholder='Search...' />
           </label>
           <ul>
             {mock.map((mock, indice) => {
