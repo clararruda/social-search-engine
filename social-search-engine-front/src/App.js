@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
-import { List, Image, Checkbox } from 'semantic-ui-react'
+import { List, Image, Checkbox, Input } from 'semantic-ui-react'
 
 let mock = [{"nome":"Shop da Maquiagem","arroba":"@shop_da_maquiagem","link":"https://www.instagram.com/shop_da_maquiagem/?hl=pt-br","seguidores":"","seguindo":"","posts":"","avatar":"https://instagram.ffor2-1.fna.fbcdn.net/v/t51.2885-19/s150x150/53889238_292523341428671_8135769945368690688_n.jpg?_nc_ht=instagram.ffor2-1.fna.fbcdn.net&_nc_ohc=Po8qn2Ir2gwAX-w7zyI&oh=68e78ac58ccdcfa1c1e16e467ae2953f&oe=5ED95146"}
 ,{"nome":"Maquiagem para Iniciantes","arroba":"@maquiagem.iniciantes","link":"https://www.instagram.com/maquiagem.iniciantes/?hl=pt-br","seguidores":"","seguindo":"","posts":"","avatar":"https://instagram.ffor2-1.fna.fbcdn.net/v/t51.2885-19/s150x150/46404607_275746819790942_2517828215393746944_n.jpg?_nc_ht=instagram.ffor2-1.fna.fbcdn.net&_nc_ohc=mYPGtNjSYQIAX_YHC9T&oh=86b81cab60c4f6432063e66ef09187b0&oe=5ED9621C"}
@@ -13,7 +13,6 @@ let mock = [{"nome":"Shop da Maquiagem","arroba":"@shop_da_maquiagem","link":"ht
 
 
 class App extends Component{
-
   render (){
     return (
       <div className="App">
@@ -24,8 +23,7 @@ class App extends Component{
             <Checkbox id='ckb-twitter' label='' defaultChecked />
           </label>
           <label id="pesquisa">
-            <input type="text" placeholder="..." style={{width: "370px"}}/>        
-            <button>Buscar</button>
+            <Input icon='search' placeholder='Search...' />
           </label>
           <ul>
             {mock.map((mock, indice) => {
