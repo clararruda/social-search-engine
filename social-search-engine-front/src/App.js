@@ -28,11 +28,11 @@ class App extends Component {
         </div>
         <header className="App-header">
 
-          <label id="checkboxes" style={{ padding: 50 }}>
-            <Checkbox id='ckb-instagram' label='' defaultChecked />
-            <Checkbox id='ckb-youtube' label='' defaultChecked />
-            <Checkbox id='ckb-twitter' label='' defaultChecked />
-          </label>
+          <div className="checkboxes" style={{ padding: 30 }}>
+            <Checkbox id='ckb-instagram' label='Instagram' defaultChecked />
+            <Checkbox id='ckb-youtube' label='Youtube' defaultChecked />
+            <Checkbox id='ckb-twitter' label='Twitter' defaultChecked /> 
+          </div>
           <label id="pesquisa">
             <Input size='small' icon='search' placeholder='Search...' />
           </label>
