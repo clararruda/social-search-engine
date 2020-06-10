@@ -1,0 +1,7 @@
+/*******************************
+     User Global Variables
+*******************************/
+
+@fontName: 'Rubik';
+@googleFontRequest: 'Rubik';
+@importGoogleFonts: true;
