@@ -1,4 +1,5 @@
 import React from "react";
+import "./styles.css";
 
 const Header = () => {
   return (
@@ -11,8 +12,8 @@ const Header = () => {
         <span style={{ fontWeight: 900 }}>ENGINE</span>
       </div>
       <div className="right menu">
-        <button className="ui item button">Entrar</button>
-        <button className="ui item button">Cadastre-se</button>
+        <button className="ui item button nav-item">Entrar</button>
+        <button className="ui item button nav-item">Cadastre-se</button>
       </div>
     </div>
   );

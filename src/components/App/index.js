@@ -2,15 +2,18 @@ import React from "react";
 import "./styles.css";
 import banner from "../../assets/images/banner.png";
 
-import FeaturesSection from "../FeaturesSection";
+import Plans from "../Plans";
 import Header from "../Header";
 
 const App = () => {
   return (
     <div id="home">
       <div className="ui inverted masthead centered segment">
-        <div className="ui page grid" style={{ height: "100vh" }}>
-          <div className="column">
+        <div
+          className="ui page grid"
+          style={{ borderBottom: "solid 1px #00B6AF" }}
+        >
+          <div className="column" style={{ paddingBottom: 0 }}>
             <Header />
             <div className="ui transition information">
               <h1 className="ui inverted centered header">
@@ -28,14 +31,14 @@ const App = () => {
                 <div className="hidden content">Cadastre-se</div>
               </button>
               <div className="ui centerted image">
-                <img src={banner} alt="Banner" style={{ maxWidth: "100vw" }} />
+                <img src={banner} alt="Banner" />
               </div>
             </div>
           </div>
         </div>
       </div>
 
-      <FeaturesSection />
+      <Plans />
     </div>
   );
 };

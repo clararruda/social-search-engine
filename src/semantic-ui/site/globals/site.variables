@@ -5,3 +5,5 @@
 @fontName: 'Rubik';
 @googleFontRequest: 'Rubik';
 @importGoogleFonts: true;
+
+@primaryColor: #00DCA9;

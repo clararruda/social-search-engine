@@ -1,0 +1,73 @@
+#pricing-section {
+  padding-top: 80px;
+}
+
+#group-btn {
+  border-radius: 20px !important;
+  border: solid 1px #D4D4D5;
+  width: 230px;
+  height: 35px;
+  position: relative;
+  z-index: 1;
+}
+
+.active-btn {
+  position: absolute;
+  z-index: 0;
+  -webkit-border-radius: 20px;
+  -moz-border-radius: 20px;
+  border-radius: 20px;
+  border: none;
+  width: 112px;
+  height: 29px;
+  display: inline-flex;
+  background: url(../../assets/images/active-button.png);
+  margin-top: 3px;
+  transition: margin-left linear 0.3s;
+}
+
+.plan-btn {
+  color: #2F4858 !important;
+  border: none !important;
+  font-weight: 600 !important;
+  font-size: 13px !important;
+  background-color: transparent !important;
+  border-radius: 20px !important;
+}
+
+.pricing-title {
+  font-weight: 600;
+}
+
+.pricing-value-container {
+  margin-top: 30px !important;
+  height: 60px !important;
+}
+
+.pricing-value-coin {
+  font-size: 16px;
+  font-weight: 600;
+  vertical-align: super;
+  margin-right: 8px;
+}
+
+.pricing-value {
+  font-size: 50px;
+  vertical-align: middle;
+}
+
+.pricing-value-type {
+  font-size: 16px;
+  font-weight: 600;
+  vertical-align: sub;
+  margin-left: 8px;
+}
+
+.pricing-btn {
+  margin: 10px 10% 30px 10% !important;
+  width: 80% !important;
+}
+
+.pricing-list-item {
+  margin: 10px 0 !important;
+}

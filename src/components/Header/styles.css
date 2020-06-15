@@ -1,0 +1,4 @@
+.nav-item:hover {
+  font-weight: 700 !important;
+  transition: font-weight linear 0.4s;
+}
