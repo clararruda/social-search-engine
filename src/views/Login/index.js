@@ -7,14 +7,14 @@ const Login = () => {
     <Grid textAlign='center' style={{ height: '100vh' }} verticalAlign='middle'>
       <Grid.Column style={{ maxWidth: 450 }}>
         <Header as='h2' color='teal' textAlign='center'>
-        <div className="logo item">
-        <span style={{ fontWeight: 900 }}>SOCIAL</span>
-        <span style={{ fontWeight: 100, textDecoration: "underline overline" }}>
-          SEARCH
+          <div className="logo item">
+            <span style={{ fontWeight: 900 }}>SOCIAL</span>
+            <span style={{ fontWeight: 100, textDecoration: "underline overline" }}>
+              SEARCH
         </span>
-        <span style={{ fontWeight: 900 }}>ENGINE</span>
-      </div>
-      </Header>
+            <span style={{ fontWeight: 900 }}>ENGINE</span>
+          </div>
+        </Header>
         <Form size='large'>
           <Segment stacked>
             <Form.Input fluid icon='user' iconPosition='left' placeholder='E-mail' />
