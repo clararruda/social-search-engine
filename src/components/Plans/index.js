@@ -47,7 +47,7 @@ const Plans = () => {
                 animation="fade up"
                 duration={1000}
               >
-                <div className="ui card">
+                <div className="ui card" style={{ height: "430px" }}>
                   <div className="content">
                     <div className="meta pricing-title">BÁSICO</div>
                     <div className="header pricing-value-container">
@@ -117,7 +117,7 @@ const Plans = () => {
             <Transition visible={isVisible} animation="fade up" duration={1000}>
               <div
                 className="ui card"
-                style={{ borderTop: "solid 4px #00DCA9" }}
+                style={{ borderTop: "solid 4px #00DCA9", height: "430px" }}
               >
                 <div className="content">
                   <div className="meta pricing-title">PRO</div>

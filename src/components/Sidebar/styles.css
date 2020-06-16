@@ -1,0 +1,39 @@
+#left-sidebar {
+  background-color: #2f4858;
+  height: 100%;
+  display: flex;
+  border: none;
+}
+
+.dash-logo {
+  color: rgba(255,255,255,0.8);
+  font-size: 20px;
+  margin: 25px auto;
+}
+
+.menu-container {
+  margin: 15px auto;
+  width: 85%;
+}
+
+.menu-content {
+  margin: 0 !important;
+}
+
+.menu-item {
+  margin: 15px auto !important;
+  padding: 15px 0 !important;
+}
+
+.menu-item-icon {
+  float: none !important;
+  margin-right: 15px !important;
+}
+
+.active-menu-item-content {
+  color: #2f4858;
+}
+
+.active-menu-item {
+  background-color: #00DCA9 !important;
+}

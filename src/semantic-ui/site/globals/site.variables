@@ -7,3 +7,4 @@
 @importGoogleFonts: true;
 
 @primaryColor: #00DCA9;
+@green: #2f4858;
