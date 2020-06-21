@@ -10,6 +10,6 @@ Aplicação desenvolvida para a disciplina Tópicos Avançados em Engenharia de 
 
 ## Autores
 
-* **Maria Clara** - *Trabalho inicial* - [@claraarruda](https://github.com/claraarruda)
+* **Maria Clara Arruda** - *Trabalho inicial* - [@claraarruda](https://github.com/claraarruda)
 * **Pablo Maribondo** - *Trabalho inicial* - [@pablomaribondo](https://github.com/pablomaribondo)
 * **Ivson de Oliveira Santos** - *Trabalho inicial* - [@ivson5](https://github.com/ivson5)
