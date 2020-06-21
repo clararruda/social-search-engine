@@ -1,8 +1,12 @@
 import React from "react";
 import { Grid, Menu, Icon } from "semantic-ui-react";
+import PropTypes from "prop-types";
+
 import "./styles.css";
 
-const Sidebar = () => {
+const Sidebar = (props) => {
+  const { onActiveTabChange, activeTab } = props;
+
   return (
     <div
       className="ui visible left vertical wide sidebar menu"
@@ -19,38 +23,93 @@ const Sidebar = () => {
         <Grid>
           <Grid.Column>
             <Menu fluid vertical secondary size="huge" className="menu-content">
-              <Menu.Item className="menu-item active-menu-item">
+              <Menu.Item
+                className={
+                  activeTab === "search"
+                    ? "menu-item active-menu-item"
+                    : "menu-item"
+                }
+                onClick={() => onActiveTabChange("search")}
+              >
                 <Icon
                   name="search"
                   size="large"
                   className="menu-item-icon"
-                  color="green"
+                  color={activeTab === "search" ? "green" : "grey"}
                 />
-                <span className="active-menu-item-content">Buscar Perfis</span>
+                <span
+                  className={
+                    activeTab === "search" ? "active-menu-item-content" : ""
+                  }
+                >
+                  Buscar Perfis
+                </span>
               </Menu.Item>
-              <Menu.Item className="menu-item">
+              <Menu.Item
+                className={
+                  activeTab === "ranking"
+                    ? "menu-item active-menu-item"
+                    : "menu-item"
+                }
+                onClick={() => onActiveTabChange("ranking")}
+              >
                 <Icon
                   name="chart bar outline"
                   size="large"
                   className="menu-item-icon"
+                  color={activeTab === "ranking" ? "green" : "grey"}
                 />
-                <span>Ranking de Buscas</span>
+                <span
+                  className={
+                    activeTab === "ranking" ? "active-menu-item-content" : ""
+                  }
+                >
+                  Ranking de Buscas
+                </span>
               </Menu.Item>
-              <Menu.Item className="menu-item">
+              <Menu.Item
+                className={
+                  activeTab === "schedule"
+                    ? "menu-item active-menu-item"
+                    : "menu-item"
+                }
+                onClick={() => onActiveTabChange("schedule")}
+              >
                 <Icon
                   name="calendar alternate outline"
                   size="large"
                   className="menu-item-icon"
+                  color={activeTab === "schedule" ? "green" : "grey"}
                 />
-                <span>Agendar Buscas</span>
+                <span
+                  className={
+                    activeTab === "schedule" ? "active-menu-item-content" : ""
+                  }
+                >
+                  Agendar Buscas
+                </span>
               </Menu.Item>
-              <Menu.Item className="menu-item">
+              <Menu.Item
+                className={
+                  activeTab === "favorites"
+                    ? "menu-item active-menu-item"
+                    : "menu-item"
+                }
+                onClick={() => onActiveTabChange("favorites")}
+              >
                 <Icon
                   name="heart outline"
                   size="large"
                   className="menu-item-icon"
+                  color={activeTab === "favorites" ? "green" : "grey"}
                 />
-                <span>Buscas Favoritas</span>
+                <span
+                  className={
+                    activeTab === "favorites" ? "active-menu-item-content" : ""
+                  }
+                >
+                  Buscas Favoritas
+                </span>
               </Menu.Item>
             </Menu>
           </Grid.Column>
@@ -58,6 +117,11 @@ const Sidebar = () => {
       </div>
     </div>
   );
+};
+
+Sidebar.propTypes = {
+  onActiveTabChange: PropTypes.func,
+  activeTab: PropTypes.string,
 };
 
 export default Sidebar;

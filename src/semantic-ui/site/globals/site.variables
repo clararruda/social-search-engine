@@ -8,3 +8,5 @@
 
 @primaryColor: #00DCA9;
 @green: #2f4858;
+@grey: rgba(255, 255, 255, 0.7);
+@red: #DB3700;

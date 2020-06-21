@@ -21,8 +21,8 @@ const Landing = () => {
                 Analytics simplificado na ponta dos dedos!
               </h1>
               <p className="ui centered lead">
-                O SocialSearchEngine rastreia as estatísticas de usuários do
-                YouTube, Instagram e Twitter!
+                O SocialSearchEngine rastreia usuários de destaque no Instagram,
+                TikTok, Twitter e YouTube!
                 <br />
                 Obtenha um entendimento mais profundo do crescimento e das
                 tendências dos usuários utilizando o SocialSearchEngine.

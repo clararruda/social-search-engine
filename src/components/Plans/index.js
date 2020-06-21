@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Transition, Visibility } from "semantic-ui-react";
+
 import "./styles.css";
 
 const Plans = () => {
@@ -65,7 +66,7 @@ const Plans = () => {
                       <div className="item pricing-list-item">
                         <i className="check icon"></i>
                         <div className="content">
-                          Busca no Instagram, Twitter e Youtube
+                          Busca no Instagram, Twitter, TikTok e Youtube
                         </div>
                       </div>
                       <div
@@ -138,7 +139,7 @@ const Plans = () => {
                     <div className="item pricing-list-item">
                       <i className="check icon"></i>
                       <div className="content">
-                        Busca no Instagram, Twitter e Youtube
+                        Busca no Instagram, Twitter, TikTok e Youtube
                       </div>
                     </div>
                     <div className="item pricing-list-item">
