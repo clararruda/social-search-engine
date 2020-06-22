@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { withRouter } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 import {
   Button,
   Form,
@@ -71,6 +71,7 @@ const Login = (props) => {
                 icon="user"
                 iconPosition="left"
                 placeholder="E-mail"
+                required
                 onChange={(event, { value }) => setEmail(value)}
               />
               <Form.Input
@@ -79,6 +80,7 @@ const Login = (props) => {
                 iconPosition="left"
                 placeholder="Senha"
                 type="password"
+                required
                 onChange={(event, { value }) => setPassword(value)}
               />
               {!isLoading ? (
@@ -109,12 +111,11 @@ const Login = (props) => {
 
           <Message>
             Novo?{" "}
-            <span
-              style={{ color: "#0CA4E8", cursor: "pointer" }}
-              onClick={() => history.replace("/register")}
-            >
-              Cadastre-se
-            </span>
+            <Link to="/register">
+              <span style={{ color: "#0CA4E8", cursor: "pointer" }}>
+                Cadastre-se
+              </span>
+            </Link>
           </Message>
         </Grid.Column>
       </Grid>

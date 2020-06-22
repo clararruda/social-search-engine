@@ -1,14 +1,12 @@
 import React, { useState } from "react";
 import { Transition, Visibility } from "semantic-ui-react";
-import PropTypes from "prop-types";
+import { Link } from "react-router-dom";
 
 import "./styles.css";
 
-const Plans = (props) => {
+const Plans = () => {
   const [isVisible, setIsVisible] = useState(false);
   const [activePlan, setActivePlan] = useState("monthly");
-
-  const { onRegister } = props;
 
   return (
     <div id="pricing-section" className="ui container centered">
@@ -104,12 +102,11 @@ const Plans = (props) => {
                       </div>
                     </div>
                   </div>
-                  <button
-                    className="ui primary button pricing-btn"
-                    onClick={onRegister}
-                  >
-                    Começar agora
-                  </button>
+                  <Link to="/register">
+                    <button className="ui primary button pricing-btn">
+                      Começar agora
+                    </button>
+                  </Link>
                   <div className="extra content">
                     <i className="credit card outline icon"></i>
                     <span style={{ fontSize: "13px" }}>
@@ -158,12 +155,11 @@ const Plans = (props) => {
                     </div>
                   </div>
                 </div>
-                <button
-                  className="ui primary button pricing-btn"
-                  onClick={onRegister}
-                >
-                  Teste gratuitamente
-                </button>
+                <Link to="/register">
+                  <button className="ui primary button pricing-btn">
+                    Teste gratuitamente
+                  </button>
+                </Link>
                 <div className="extra content">
                   <i className="credit card outline icon"></i>
                   <span style={{ fontSize: "13px" }}>
@@ -177,10 +173,6 @@ const Plans = (props) => {
       </div>
     </div>
   );
-};
-
-Plans.propTypes = {
-  onRegister: PropTypes.func,
 };
 
 export default Plans;

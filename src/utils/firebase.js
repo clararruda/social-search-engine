@@ -27,6 +27,23 @@ class Firebase {
     return this.auth.signOut();
   }
 
+  async register(name, email, password) {
+    await this.auth.createUserWithEmailAndPassword(email, password);
+    return this.auth.currentUser.updateProfile({
+      displayName: name,
+    });
+  }
+
+  addPlan(plan) {
+    if (!this.auth.currentUser) {
+      return alert("Not authorized");
+    }
+
+    return this.db.doc(`users/${this.auth.currentUser.uid}`).set({
+      plan,
+    });
+  }
+
   isInitialized() {
     return new Promise((resolve) => {
       this.auth.onAuthStateChanged(resolve);
@@ -35,6 +52,11 @@ class Firebase {
 
   getCurrentUser() {
     return this.auth.currentUser;
+  }
+
+  async getCurrentUserPlan() {
+    const plan = await this.db.doc(`users/${this.auth.currentUser.uid}`).get();
+    return plan.get("plan");
   }
 }
 
