@@ -1,11 +1,14 @@
 import React, { useState } from "react";
 import { Transition, Visibility } from "semantic-ui-react";
+import PropTypes from "prop-types";
 
 import "./styles.css";
 
-const Plans = () => {
+const Plans = (props) => {
   const [isVisible, setIsVisible] = useState(false);
   const [activePlan, setActivePlan] = useState("monthly");
+
+  const { onRegister } = props;
 
   return (
     <div id="pricing-section" className="ui container centered">
@@ -101,7 +104,10 @@ const Plans = () => {
                       </div>
                     </div>
                   </div>
-                  <button className="ui primary button pricing-btn">
+                  <button
+                    className="ui primary button pricing-btn"
+                    onClick={onRegister}
+                  >
                     Começar agora
                   </button>
                   <div className="extra content">
@@ -152,7 +158,10 @@ const Plans = () => {
                     </div>
                   </div>
                 </div>
-                <button className="ui primary button pricing-btn">
+                <button
+                  className="ui primary button pricing-btn"
+                  onClick={onRegister}
+                >
                   Teste gratuitamente
                 </button>
                 <div className="extra content">
@@ -168,6 +177,10 @@ const Plans = () => {
       </div>
     </div>
   );
+};
+
+Plans.propTypes = {
+  onRegister: PropTypes.func,
 };
 
 export default Plans;
