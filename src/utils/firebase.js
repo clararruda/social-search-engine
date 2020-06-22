@@ -99,6 +99,54 @@ class Firebase {
     }
   }
 
+  async getRanking() {
+    if (this.auth.currentUser) {
+      const searchDoc = await this.db
+        .collection("searches")
+        .orderBy("amount", "desc")
+        .get();
+
+      const list = searchDoc.docs.map((document) => ({
+        query: document.data().query,
+        social: document.data().social,
+        amount: document.data().amount,
+      }));
+
+      let [instagramAmount, tiktokAmount, twitterAmount, youtubeAmount] = [
+        0,
+        0,
+        0,
+        0,
+      ];
+
+      list.forEach((element) => {
+        switch (element.social) {
+          case "instagram":
+            instagramAmount += element.amount;
+            break;
+          case "tiktok":
+            tiktokAmount += element.amount;
+            break;
+          case "twitter":
+            twitterAmount += element.amount;
+            break;
+          default:
+            youtubeAmount += element.amount;
+        }
+      });
+
+      return {
+        list: list.slice(0, 10),
+        statistics: [
+          instagramAmount,
+          tiktokAmount,
+          twitterAmount,
+          youtubeAmount,
+        ],
+      };
+    }
+  }
+
   // async addScheduledSearch(plan) {
   //   if (this.auth.currentUser) {
   //     await this.db.collection("users").doc(this.auth.currentUser.uid).set({
