@@ -5,7 +5,7 @@ import PropTypes from "prop-types";
 import "./styles.css";
 
 const Sidebar = (props) => {
-  const { onActiveTabChange, activeTab } = props;
+  const { onActiveTabChange, activeTab, plan } = props;
 
   return (
     <div
@@ -67,50 +67,56 @@ const Sidebar = (props) => {
                   Ranking de Buscas
                 </span>
               </Menu.Item>
-              <Menu.Item
-                className={
-                  activeTab === "schedule"
-                    ? "menu-item active-menu-item"
-                    : "menu-item"
-                }
-                onClick={() => onActiveTabChange("schedule")}
-              >
-                <Icon
-                  name="calendar alternate outline"
-                  size="large"
-                  className="menu-item-icon"
-                  color={activeTab === "schedule" ? "green" : "grey"}
-                />
-                <span
+              {plan === "pro" && (
+                <Menu.Item
                   className={
-                    activeTab === "schedule" ? "active-menu-item-content" : ""
+                    activeTab === "schedule"
+                      ? "menu-item active-menu-item"
+                      : "menu-item"
                   }
+                  onClick={() => onActiveTabChange("schedule")}
                 >
-                  Agendar Buscas
-                </span>
-              </Menu.Item>
-              <Menu.Item
-                className={
-                  activeTab === "favorites"
-                    ? "menu-item active-menu-item"
-                    : "menu-item"
-                }
-                onClick={() => onActiveTabChange("favorites")}
-              >
-                <Icon
-                  name="heart outline"
-                  size="large"
-                  className="menu-item-icon"
-                  color={activeTab === "favorites" ? "green" : "grey"}
-                />
-                <span
+                  <Icon
+                    name="calendar alternate outline"
+                    size="large"
+                    className="menu-item-icon"
+                    color={activeTab === "schedule" ? "green" : "grey"}
+                  />
+                  <span
+                    className={
+                      activeTab === "schedule" ? "active-menu-item-content" : ""
+                    }
+                  >
+                    Agendar Buscas
+                  </span>
+                </Menu.Item>
+              )}
+              {plan === "pro" && (
+                <Menu.Item
                   className={
-                    activeTab === "favorites" ? "active-menu-item-content" : ""
+                    activeTab === "favorites"
+                      ? "menu-item active-menu-item"
+                      : "menu-item"
                   }
+                  onClick={() => onActiveTabChange("favorites")}
                 >
-                  Buscas Favoritas
-                </span>
-              </Menu.Item>
+                  <Icon
+                    name="heart outline"
+                    size="large"
+                    className="menu-item-icon"
+                    color={activeTab === "favorites" ? "green" : "grey"}
+                  />
+                  <span
+                    className={
+                      activeTab === "favorites"
+                        ? "active-menu-item-content"
+                        : ""
+                    }
+                  >
+                    Buscas Favoritas
+                  </span>
+                </Menu.Item>
+              )}
             </Menu>
           </Grid.Column>
         </Grid>
@@ -120,8 +126,9 @@ const Sidebar = (props) => {
 };
 
 Sidebar.propTypes = {
-  onActiveTabChange: PropTypes.func,
   activeTab: PropTypes.string,
+  onActiveTabChange: PropTypes.func,
+  plan: PropTypes.string,
 };
 
 export default Sidebar;

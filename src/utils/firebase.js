@@ -34,15 +34,78 @@ class Firebase {
     });
   }
 
-  addPlan(plan) {
-    if (!this.auth.currentUser) {
-      return alert("Not authorized");
+  async addPlan(plan) {
+    if (this.auth.currentUser) {
+      await this.db.collection("users").doc(this.auth.currentUser.uid).set({
+        plan,
+        favorites: [],
+      });
     }
-
-    return this.db.doc(`users/${this.auth.currentUser.uid}`).set({
-      plan,
-    });
   }
+
+  async addSearch(queryData) {
+    if (this.auth.currentUser) {
+      const { query, social } = queryData;
+      const searchDoc = await this.db
+        .collection("searches")
+        .where("query", "==", query)
+        .where("social", "==", social)
+        .get();
+
+      if (searchDoc.empty) {
+        await this.db.collection("searches").doc().set({
+          query,
+          social,
+          amount: 1,
+        });
+      } else {
+        const id = searchDoc.docs[0].id;
+        const amount = searchDoc.docs[0].data().amount;
+        await this.db
+          .collection("searches")
+          .doc(id)
+          .update({
+            amount: parseInt(amount) + 1,
+          });
+      }
+    }
+  }
+
+  async addFavoriteSearch(queryData) {
+    if (this.auth.currentUser) {
+      const { query, social } = queryData;
+      const searchDoc = await this.db
+        .collection("searches")
+        .where("query", "==", query)
+        .where("social", "==", social)
+        .get();
+
+      const ref = searchDoc.docs[0].ref;
+      const userData = await this.getCurrentUserData(this.auth.currentUser);
+
+      const favoriteRef = await this.db
+        .collection("users")
+        .where("favorites", "array-contains", ref)
+        .get();
+
+      if (favoriteRef.empty) {
+        await this.db
+          .collection("users")
+          .doc(this.auth.currentUser.uid)
+          .update({
+            favorites: [...userData.favorites, ref],
+          });
+      }
+    }
+  }
+
+  // async addScheduledSearch(plan) {
+  //   if (this.auth.currentUser) {
+  //     await this.db.collection("users").doc(this.auth.currentUser.uid).set({
+  //       plan,
+  //     });
+  //   }
+  // }
 
   isInitialized() {
     return new Promise((resolve) => {
@@ -54,9 +117,9 @@ class Firebase {
     return this.auth.currentUser;
   }
 
-  async getCurrentUserPlan() {
-    const plan = await this.db.doc(`users/${this.auth.currentUser.uid}`).get();
-    return plan.get("plan");
+  async getCurrentUserData(user) {
+    const userDoc = await this.db.collection("users").doc(user.uid).get();
+    return userDoc.data();
   }
 }
 

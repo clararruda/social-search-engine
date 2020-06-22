@@ -24,6 +24,11 @@ const Login = (props) => {
 
   const { history } = props;
 
+  if (firebase.getCurrentUser()) {
+    history.replace("/dashboard");
+    return null;
+  }
+
   const loginHandler = async () => {
     try {
       setIsUnauthorized(false);

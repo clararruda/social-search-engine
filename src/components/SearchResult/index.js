@@ -33,7 +33,7 @@ const templates = {
             {element.biography}
           </Card.Description>
         </Card.Content>
-        {element.isVerified ? (
+        {element.isVerified && (
           <Label
             as="span"
             color="teal"
@@ -42,8 +42,6 @@ const templates = {
           >
             Verificado
           </Label>
-        ) : (
-          ""
         )}
         <Card.Content extra>
           Seguidores: {element.followers}
@@ -85,7 +83,7 @@ const templates = {
             {element.signature}
           </Card.Description>
         </Card.Content>
-        {element.isVerified ? (
+        {element.isVerified && (
           <Label
             as="span"
             color="teal"
@@ -94,8 +92,6 @@ const templates = {
           >
             Verificado
           </Label>
-        ) : (
-          ""
         )}
         <Card.Content extra>
           Seguidores: {element.followers}
@@ -137,7 +133,7 @@ const templates = {
             {element.description}
           </Card.Description>
         </Card.Content>
-        {element.isVerified ? (
+        {element.isVerified && (
           <Label
             as="span"
             color="teal"
@@ -146,8 +142,6 @@ const templates = {
           >
             Verificado
           </Label>
-        ) : (
-          ""
         )}
         <Card.Content extra>
           Seguidores: {element.followers}

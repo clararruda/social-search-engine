@@ -27,6 +27,11 @@ const Register = (props) => {
 
   const { history } = props;
 
+  if (firebase.getCurrentUser()) {
+    history.replace("/dashboard");
+    return null;
+  }
+
   const registerHandler = async () => {
     try {
       setErrorMessage(null);
