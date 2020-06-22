@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useState } from "react";
+import { withRouter } from "react-router-dom";
 import {
   Button,
   Form,
@@ -6,10 +7,36 @@ import {
   Header,
   Message,
   Segment,
+  Dimmer,
+  Loader,
 } from "semantic-ui-react";
+import PropTypes from "prop-types";
+
 import "./styles.css";
 
-const Login = () => {
+import firebase from "../../utils/firebase";
+
+const Login = (props) => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+  const [isUnauthorized, setIsUnauthorized] = useState(false);
+
+  const { history } = props;
+
+  const loginHandler = async () => {
+    try {
+      setIsUnauthorized(false);
+      setIsLoading(true);
+      await firebase.login(email, password);
+      history.replace("/dashboard");
+      setIsLoading(false);
+    } catch (error) {
+      setIsUnauthorized(true);
+      setIsLoading(false);
+    }
+  };
+
   return (
     <div id="login-container">
       <Grid
@@ -44,6 +71,7 @@ const Login = () => {
                 icon="user"
                 iconPosition="left"
                 placeholder="E-mail"
+                onChange={(event, { value }) => setEmail(value)}
               />
               <Form.Input
                 fluid
@@ -51,16 +79,40 @@ const Login = () => {
                 iconPosition="left"
                 placeholder="Senha"
                 type="password"
+                onChange={(event, { value }) => setPassword(value)}
               />
-
-              <Button primary fluid size="large" style={{ marginTop: "30px" }}>
-                Login
-              </Button>
+              {!isLoading ? (
+                <Button
+                  primary
+                  fluid
+                  size="large"
+                  style={{ marginTop: "30px" }}
+                  onClick={loginHandler}
+                >
+                  Login
+                </Button>
+              ) : (
+                <Dimmer inverted active>
+                  <Loader inverted />
+                </Dimmer>
+              )}
+              {isUnauthorized && (
+                <div
+                  className="ui red basic label"
+                  style={{ marginTop: "15px" }}
+                >
+                  E-mail ou senha inválidos
+                </div>
+              )}
             </Segment>
           </Form>
+
           <Message>
             Novo?{" "}
-            <span style={{ color: "#0CA4E8", cursor: "pointer" }}>
+            <span
+              style={{ color: "#0CA4E8", cursor: "pointer" }}
+              onClick={() => history.replace("/register")}
+            >
               Cadastre-se
             </span>
           </Message>
@@ -70,4 +122,8 @@ const Login = () => {
   );
 };
 
-export default Login;
+Login.propTypes = {
+  history: PropTypes.object,
+};
+
+export default withRouter(Login);
