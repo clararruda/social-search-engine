@@ -10,7 +10,7 @@ import Search from "../../components/Search";
 import Sidebar from "../../components/Sidebar";
 
 const Dashboard = () => {
-  const [activeTab, setActiveTab] = useState("search");
+  const [activeTab, setActiveTab] = useState("favorites");
 
   const components = {
     search() {

@@ -1,0 +1,6 @@
+#schedule-container {
+  display: flex;
+  margin: 100px 50px 50px 50px;
+  width: 77%;
+  flex-direction: column;
+}
