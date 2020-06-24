@@ -13,7 +13,7 @@ import Sidebar from "../../components/Sidebar";
 import firebase from "../../utils/firebase";
 
 const Dashboard = (props) => {
-  const [activeTab, setActiveTab] = useState("ranking");
+  const [activeTab, setActiveTab] = useState("schedule");
   const [user, setUser] = useState(null);
   const [plan, setPlan] = useState(null);
 

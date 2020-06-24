@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import DatePicker from "react-datepicker";
 import {
   Button,
-  Divider,
   Form,
   Grid,
   Segment,
@@ -93,115 +92,123 @@ const Schedule = () => {
 
   return (
     <div id="schedule-container">
-      <Segment placeholder>
-        <Grid columns={2} relaxed="very" stackable>
-          <Grid.Column>
-            <h3
-              style={{
-                textAlign: "center",
-                marginBottom: "40px",
-                marginTop: "20px",
-              }}
-            >
-              Agendar buscas
-            </h3>
-            <Form>
-              <Form.Input
-                label="Busca"
-                placeholder="Palavras-chave"
-                required
-                value={query}
-                onChange={(event, { value }) => setQuery(value)}
-              />
-              <Form.Select
-                label="Rede social"
-                options={dropdownOptions}
-                placeholder="Selecione..."
-                required
-                value={social}
-                onChange={(event, { value }) => setSocial(value)}
-              />
-              <div className="required field">
-                <label>Data</label>
-                <DatePicker
-                  selected={startDate}
-                  onChange={(date) => setStartDate(date)}
-                  placeholderText="Selecione..."
-                  showTimeSelect
-                  timeFormat="HH:mm"
-                  timeIntervals={60}
-                  timeCaption="time"
-                  dateFormat="dd/MM/yyyy  - HH:mm"
-                  minDate={tomorrow}
-                />
+      <Grid columns={2} stackable padded>
+        <Grid.Row>
+          <Grid.Column width={4}>
+            <Segment raised>
+              <h3
+                style={{
+                  textAlign: "center",
+                  marginBottom: "40px",
+                  marginTop: "20px",
+                }}
+              >
+                Agendar buscas
+              </h3>
+              <div className="schedule-form">
+                <Form>
+                  <Form.Input
+                    label="Busca"
+                    placeholder="Palavras-chave"
+                    required
+                    value={query}
+                    onChange={(event, { value }) => setQuery(value)}
+                  />
+                  <Form.Select
+                    label="Rede social"
+                    options={dropdownOptions}
+                    placeholder="Selecione..."
+                    required
+                    value={social}
+                    onChange={(event, { value }) => setSocial(value)}
+                  />
+                  <div className="required field">
+                    <label>Data</label>
+                    <DatePicker
+                      selected={startDate}
+                      onChange={(date) => setStartDate(date)}
+                      placeholderText="Selecione..."
+                      showTimeSelect
+                      timeFormat="HH:mm"
+                      timeIntervals={60}
+                      timeCaption="time"
+                      dateFormat="dd/MM/yyyy  - HH:mm"
+                      minDate={tomorrow}
+                    />
+                  </div>
+                  {!isLoading ? (
+                    <Button
+                      content="Agendar busca"
+                      primary
+                      style={{ margin: "15px 10% 20px 10%", width: "80%" }}
+                      disabled={
+                        query.length === 0 ||
+                        social.length === 0 ||
+                        startDate === null
+                      }
+                      onClick={onScheduleHandler}
+                    />
+                  ) : (
+                    <Dimmer inverted active>
+                      <Loader inverted />
+                    </Dimmer>
+                  )}
+                </Form>
               </div>
-              {!isLoading ? (
-                <Button
-                  content="Agendar busca"
-                  primary
-                  style={{ marginTop: "40px", marginBottom: "40px" }}
-                  disabled={
-                    query.length === 0 ||
-                    social.length === 0 ||
-                    startDate === null
-                  }
-                  onClick={onScheduleHandler}
-                />
-              ) : (
-                <Dimmer inverted active>
-                  <Loader inverted />
-                </Dimmer>
-              )}
-            </Form>
+            </Segment>
           </Grid.Column>
 
-          <Grid.Column>
-            <h3
-              style={{
-                textAlign: "center",
-                marginBottom: "40px",
-                marginTop: "20px",
-              }}
-            >
-              Buscas agendadas
-            </h3>
-            <Table celled padded columns="4">
-              <Table.Header>
-                <Table.Row>
-                  <Table.HeaderCell textAlign="center">Busca</Table.HeaderCell>
-                  <Table.HeaderCell textAlign="center">
-                    Rede Social
-                  </Table.HeaderCell>
-                  <Table.HeaderCell textAlign="center">Data</Table.HeaderCell>
-                  <Table.HeaderCell textAlign="center">
-                    Resultados
-                  </Table.HeaderCell>
-                </Table.Row>
-              </Table.Header>
+          <Grid.Column width={12}>
+            <Segment raised>
+              <h3
+                style={{
+                  textAlign: "center",
+                  marginBottom: "40px",
+                  marginTop: "20px",
+                }}
+              >
+                Buscas agendadas
+              </h3>
+              <Table celled padded columns="4">
+                <Table.Header>
+                  <Table.Row>
+                    <Table.HeaderCell textAlign="center">
+                      Busca
+                    </Table.HeaderCell>
+                    <Table.HeaderCell textAlign="center">
+                      Rede Social
+                    </Table.HeaderCell>
+                    <Table.HeaderCell textAlign="center">Data</Table.HeaderCell>
+                    <Table.HeaderCell textAlign="center">
+                      Resultados
+                    </Table.HeaderCell>
+                  </Table.Row>
+                </Table.Header>
 
-              <Table.Body>
-                {scheduleList &&
-                  scheduleList.map((element, index) => (
-                    <Table.Row key={index}>
-                      <Table.Cell textAlign="center">
-                        {element.query}
-                      </Table.Cell>
-                      <Table.Cell textAlign="center">
-                        {element.social}
-                      </Table.Cell>
-                      <Table.Cell textAlign="center">
-                        {element.date.toDate().toLocaleString()}
-                      </Table.Cell>
-                      <Table.Cell textAlign="center">Ver resultados</Table.Cell>
-                    </Table.Row>
-                  ))}
-              </Table.Body>
-            </Table>
+                <Table.Body>
+                  {scheduleList &&
+                    scheduleList.map((element, index) => (
+                      <Table.Row key={index}>
+                        <Table.Cell textAlign="center">
+                          {element.query}
+                        </Table.Cell>
+                        <Table.Cell textAlign="center">
+                          {element.social}
+                        </Table.Cell>
+                        <Table.Cell textAlign="center">
+                          {element.date.toDate().toLocaleString()}
+                        </Table.Cell>
+                        <Table.Cell textAlign="center">
+                          Ver resultados
+                        </Table.Cell>
+                      </Table.Row>
+                    ))}
+                </Table.Body>
+              </Table>
+            </Segment>
           </Grid.Column>
-        </Grid>
-
-        <Divider vertical>+</Divider>
-      </Segment>
+        </Grid.Row>
+      </Grid>
     </div>
   );
 };
