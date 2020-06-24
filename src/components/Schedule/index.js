@@ -169,7 +169,12 @@ const Schedule = () => {
               >
                 Buscas agendadas
               </h3>
-              <Table celled padded columns="4">
+              <Table
+                celled
+                padded
+                columns="4"
+                style={{ width: "90%", margin: "0 5%  20px 5%" }}
+              >
                 <Table.Header>
                   <Table.Row>
                     <Table.HeaderCell textAlign="center">

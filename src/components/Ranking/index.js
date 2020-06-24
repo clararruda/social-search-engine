@@ -37,7 +37,13 @@ const Ranking = () => {
                   Ranking de buscas por palavras chave
                 </h3>
                 {keywordsRanking.length !== 0 && (
-                  <Table celled padded columns="4" verticalAlign="middle">
+                  <Table
+                    celled
+                    padded
+                    columns="4"
+                    verticalAlign="middle"
+                    style={{ width: "90%", margin: "0 5%  20px 5%" }}
+                  >
                     <Table.Header>
                       <Table.Row>
                         <Table.HeaderCell textAlign="center">
@@ -58,7 +64,7 @@ const Ranking = () => {
                       <Table.Body key={index}>
                         <Table.Row>
                           <Table.Cell>
-                            <Header as="h3" textAlign="center">
+                            <Header as="h4" textAlign="center">
                               {index + 1}
                             </Header>
                           </Table.Cell>

@@ -18,49 +18,65 @@ const Favorites = () => {
   }, [favorites]);
   return (
     <div id="favorites-container">
-      <Segment placeholder>
-        <Grid columns={1} relaxed="very" stackable>
-          <Grid.Column>
-            {favorites ? (
-              <Table celled padded columns="3">
-                <Table.Header>
-                  <Table.Row>
-                    <Table.HeaderCell textAlign="center">
-                      Busca
-                    </Table.HeaderCell>
-                    <Table.HeaderCell textAlign="center">
-                      Rede Social
-                    </Table.HeaderCell>
-                    <Table.HeaderCell textAlign="center">
-                      Opções
-                    </Table.HeaderCell>
-                  </Table.Row>
-                </Table.Header>
-
-                <Table.Body>
-                  {favorites.map((element, index) => (
-                    <Table.Row key={index}>
-                      <Table.Cell textAlign="center">
-                        {element.query}
-                      </Table.Cell>
-                      <Table.Cell textAlign="center">
-                        {element.social}
-                      </Table.Cell>
-                      <Table.Cell textAlign="center">
-                        Buscar novamente
-                      </Table.Cell>
+      <Grid columns={1} padded stackable>
+        <Grid.Row centered>
+          <Grid.Column width={14}>
+            <Segment raised>
+              <h3
+                style={{
+                  textAlign: "center",
+                  marginBottom: "40px",
+                  marginTop: "20px",
+                }}
+              >
+                Buscas favoritas
+              </h3>
+              {favorites ? (
+                <Table
+                  celled
+                  padded
+                  columns="3"
+                  style={{ width: "90%", margin: "0 5%  20px 5%" }}
+                >
+                  <Table.Header>
+                    <Table.Row>
+                      <Table.HeaderCell textAlign="center">
+                        Busca
+                      </Table.HeaderCell>
+                      <Table.HeaderCell textAlign="center">
+                        Rede Social
+                      </Table.HeaderCell>
+                      <Table.HeaderCell textAlign="center">
+                        Opções
+                      </Table.HeaderCell>
                     </Table.Row>
-                  ))}
-                </Table.Body>
-              </Table>
-            ) : (
-              <Dimmer inverted active>
-                <Loader inverted />
-              </Dimmer>
-            )}
+                  </Table.Header>
+
+                  <Table.Body>
+                    {favorites.map((element, index) => (
+                      <Table.Row key={index}>
+                        <Table.Cell textAlign="center">
+                          {element.query}
+                        </Table.Cell>
+                        <Table.Cell textAlign="center">
+                          {element.social}
+                        </Table.Cell>
+                        <Table.Cell textAlign="center">
+                          Buscar novamente
+                        </Table.Cell>
+                      </Table.Row>
+                    ))}
+                  </Table.Body>
+                </Table>
+              ) : (
+                <Dimmer inverted active>
+                  <Loader inverted />
+                </Dimmer>
+              )}
+            </Segment>
           </Grid.Column>
-        </Grid>
-      </Segment>
+        </Grid.Row>
+      </Grid>
     </div>
   );
 };
