@@ -39,6 +39,7 @@ class Firebase {
       await this.db.collection("users").doc(this.auth.currentUser.uid).set({
         plan,
         favorites: [],
+        scheduled: [],
       });
     }
   }
@@ -99,6 +100,29 @@ class Firebase {
     }
   }
 
+  async getFavorites() {
+    if (this.auth.currentUser) {
+      const userData = await this.getCurrentUserData(this.auth.currentUser);
+      const { favorites } = userData;
+
+      if (favorites.length > 0) {
+        return Promise.all(
+          favorites.map(async (document) => {
+            const ref = await document.get();
+            const { query, social } = ref.data();
+
+            return {
+              query,
+              social,
+            };
+          })
+        );
+      } else {
+        return [];
+      }
+    }
+  }
+
   async getRanking() {
     if (this.auth.currentUser) {
       const searchDoc = await this.db
@@ -147,13 +171,22 @@ class Firebase {
     }
   }
 
-  // async addScheduledSearch(plan) {
-  //   if (this.auth.currentUser) {
-  //     await this.db.collection("users").doc(this.auth.currentUser.uid).set({
-  //       plan,
-  //     });
-  //   }
-  // }
+  async addScheduledSearch(queryData) {
+    if (this.auth.currentUser) {
+      const { query, social, startDate: date } = queryData;
+
+      const userData = await this.getCurrentUserData(this.auth.currentUser);
+
+      const newScheduled = { query, social, date };
+
+      await this.db
+        .collection("users")
+        .doc(this.auth.currentUser.uid)
+        .update({
+          scheduled: [...userData.scheduled, newScheduled],
+        });
+    }
+  }
 
   isInitialized() {
     return new Promise((resolve) => {

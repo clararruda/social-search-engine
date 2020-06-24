@@ -128,11 +128,7 @@ const Search = (props) => {
         )}
       </div>
       {!isLoading ? (
-        result.length !== 0 ? (
-          <SearchResult data={result} social={social} />
-        ) : (
-          <div></div>
-        )
+        result.length !== 0 && <SearchResult data={result} social={social} />
       ) : (
         <Loader content="Buscando" active />
       )}
