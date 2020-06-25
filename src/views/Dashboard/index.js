@@ -23,9 +23,9 @@ const Dashboard = (props) => {
     (async () => {
       const currentUser = firebase.getCurrentUser();
       if (currentUser) {
-        const currentPlan = await firebase.getCurrentUserData(currentUser);
+        const currentUserData = await firebase.getCurrentUserData(currentUser);
         setUser(currentUser);
-        setPlan(currentPlan.plan);
+        setPlan(currentUserData.plan);
       }
     })();
   }, [user, plan]);
@@ -66,7 +66,7 @@ const Dashboard = (props) => {
         activeTab={activeTab}
         plan={plan}
       />
-      <Navbar onLogout={onLogoutHandler} username={user.displayName} />
+      <Navbar onLogout={onLogoutHandler} user={user} plan={plan} />
       <div id="main">{components[activeTab]()}</div>
     </div>
   ) : (
