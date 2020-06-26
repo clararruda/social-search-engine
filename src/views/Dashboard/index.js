@@ -22,11 +22,9 @@ const Dashboard = (props) => {
   useEffect(() => {
     (async () => {
       const currentUser = firebase.getCurrentUser();
-      if (currentUser) {
-        const currentUserData = await firebase.getCurrentUserData(currentUser);
-        setUser(currentUser);
-        setPlan(currentUserData.plan);
-      }
+      const currentUserData = await firebase.getCurrentUserData(currentUser);
+      setUser(currentUser);
+      setPlan(currentUserData.plan);
     })();
   }, [user, plan]);
 
@@ -59,6 +57,10 @@ const Dashboard = (props) => {
     history.push("/");
   };
 
+  const onPlanUpdateHandler = (newPlan) => {
+    setPlan(newPlan);
+  };
+
   return user ? (
     <div id="dashboard">
       <Sidebar
@@ -66,7 +68,12 @@ const Dashboard = (props) => {
         activeTab={activeTab}
         plan={plan}
       />
-      <Navbar onLogout={onLogoutHandler} user={user} plan={plan} />
+      <Navbar
+        onLogout={onLogoutHandler}
+        user={user}
+        plan={plan}
+        onPlanUpdate={onPlanUpdateHandler}
+      />
       <div id="main">{components[activeTab]()}</div>
     </div>
   ) : (

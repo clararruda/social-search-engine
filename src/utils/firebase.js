@@ -188,12 +188,6 @@ class Firebase {
     }
   }
 
-  isInitialized() {
-    return new Promise((resolve) => {
-      this.auth.onAuthStateChanged(resolve);
-    });
-  }
-
   getCurrentUser() {
     return this.auth.currentUser;
   }
@@ -201,6 +195,26 @@ class Firebase {
   async getCurrentUserData(user) {
     const userDoc = await this.db.collection("users").doc(user.uid).get();
     return userDoc.data();
+  }
+
+  async updateCurrentUserName(name) {
+    if (this.auth.currentUser) {
+      await this.getCurrentUser().updateProfile({ displayName: name });
+    }
+  }
+
+  async updateCurrentUserPlan(plan) {
+    if (this.auth.currentUser) {
+      await this.db.collection("users").doc(this.getCurrentUser().uid).update({
+        plan,
+      });
+    }
+  }
+
+  isInitialized() {
+    return new Promise((resolve) => {
+      this.auth.onAuthStateChanged(resolve);
+    });
   }
 }
 

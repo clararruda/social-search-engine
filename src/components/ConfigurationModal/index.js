@@ -1,24 +1,51 @@
 import React, { useState, useEffect } from "react";
-import { Modal, Icon, Header, Form, Checkbox, Button } from "semantic-ui-react";
+import {
+  Modal,
+  Icon,
+  Header,
+  Form,
+  Checkbox,
+  Button,
+  Dimmer,
+  Loader,
+} from "semantic-ui-react";
 import PropTypes from "prop-types";
+
+import firebase from "../../utils/firebase";
 
 const ConfigurationModal = (props) => {
   const [configName, setConfigName] = useState(null);
   const [configPlan, setConfigPlan] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
 
-  const { trigger, user, plan, open, display } = props;
+  const { trigger, user, plan, open, display, onPlanUpdate } = props;
 
   useEffect(() => {
-    if (plan !== null) {
+    if (!open) {
       setConfigName(user.displayName);
       setConfigPlan(plan);
     }
-  }, [plan, user]);
+  }, [open, user, plan]);
 
-  const onEditUserHandler = () => {
-    console.log(configPlan);
-    console.log(configName);
-    display(false);
+  const onEditUserHandler = async () => {
+    try {
+      setIsLoading(true);
+
+      if (configName.length > 0 && configName !== user.displayName) {
+        await firebase.updateCurrentUserName(configName);
+      }
+
+      if (configPlan !== plan) {
+        await firebase.updateCurrentUserPlan(configPlan);
+        onPlanUpdate(configPlan);
+      }
+
+      setIsLoading(false);
+      display(false);
+    } catch (error) {
+      setIsLoading(false);
+      console.log(error.message);
+    }
   };
 
   return (
@@ -72,13 +99,20 @@ const ConfigurationModal = (props) => {
               </Form.Group>
             )}
           </Form>
-          <Button
-            content="Confirmar"
-            primary
-            floated="right"
-            style={{ marginBottom: "20px" }}
-            onClick={onEditUserHandler}
-          />
+
+          {!isLoading ? (
+            <Button
+              content="Confirmar"
+              primary
+              floated="right"
+              style={{ marginBottom: "20px" }}
+              onClick={onEditUserHandler}
+            />
+          ) : (
+            <Dimmer inverted active>
+              <Loader inverted />
+            </Dimmer>
+          )}
         </Modal.Description>
       </Modal.Content>
     </Modal>
@@ -91,6 +125,7 @@ ConfigurationModal.propTypes = {
   plan: PropTypes.string,
   open: PropTypes.bool,
   display: PropTypes.func,
+  onPlanUpdate: PropTypes.func,
 };
 
 export default ConfigurationModal;

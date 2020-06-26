@@ -12,7 +12,7 @@ import DropdownMenu from "../DropdownMenu";
 const Navbar = (props) => {
   const [isConfigOpen, setIsConfigOpen] = useState(false);
   const [isInfoOpen, setIsInfoOpen] = useState(false);
-  const { onLogout, user, plan } = props;
+  const { onLogout, user, plan, onPlanUpdate } = props;
 
   const onConfigDisplayHandler = (isOpen) => {
     setIsConfigOpen(isOpen);
@@ -58,6 +58,7 @@ const Navbar = (props) => {
             plan={plan}
             open={isConfigOpen}
             display={onConfigDisplayHandler}
+            onPlanUpdate={onPlanUpdate}
           />
           <Dropdown.Divider />
           <Dropdown.Item text="Sair" icon="power off" onClick={onLogout} />
@@ -69,6 +70,7 @@ const Navbar = (props) => {
 
 Navbar.propTypes = {
   onLogout: PropTypes.func,
+  onPlanUpdate: PropTypes.func,
   plan: PropTypes.string,
   user: PropTypes.object,
 };
