@@ -21,7 +21,7 @@ const Ranking = () => {
   });
 
   return (
-    <div id="ranking-container">
+    <div className="main-container">
       <Grid columns={2} stackable padded>
         <Grid.Row>
           <Grid.Column width={11}>

@@ -91,7 +91,7 @@ const Schedule = () => {
   };
 
   return (
-    <div id="schedule-container">
+    <div className="main-container">
       <Grid columns={2} stackable padded>
         <Grid.Row>
           <Grid.Column width={4}>

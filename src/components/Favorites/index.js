@@ -3,8 +3,6 @@ import { Table, Segment, Grid, Dimmer, Loader } from "semantic-ui-react";
 
 import firebase from "../../utils/firebase";
 
-import "./styles.css";
-
 const Favorites = () => {
   const [favorites, setFavorites] = useState(null);
 
@@ -17,7 +15,7 @@ const Favorites = () => {
     })();
   }, [favorites]);
   return (
-    <div id="favorites-container">
+    <div className="main-container">
       <Grid columns={1} padded stackable>
         <Grid.Row centered>
           <Grid.Column width={14}>
