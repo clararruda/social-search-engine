@@ -2,6 +2,10 @@
   margin: 0 5%;
 }
 
+.react-datepicker {
+  width: max-content !important;
+}
+
 .react-datepicker-wrapper {
   width: 100% !important;
 }
