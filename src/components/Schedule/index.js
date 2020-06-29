@@ -10,6 +10,7 @@ import {
   Loader,
   Icon,
   Divider,
+  Message,
 } from "semantic-ui-react";
 
 import "react-datepicker/dist/react-datepicker.css";
@@ -47,36 +48,33 @@ const Schedule = () => {
 
   useEffect(() => {
     (async () => {
-      if (scheduleList !== undefined && scheduleList.length === 0) {
-        try {
-          setScheduleList(undefined);
-          const user = firebase.getCurrentUser();
-          await firebase.db
-            .collection("users")
-            .doc(user.uid)
-            .onSnapshot(async (snapshot) => {
-              const scheduled = snapshot.data().scheduled;
-              scheduled.sort(function (a, b) {
-                if (a.date > b.date) {
-                  return -1;
-                }
-                if (a.date < b.date) {
-                  return 1;
-                }
-                return 0;
-              });
-              setScheduleList(scheduled);
-              setQuery("");
-              setSocial("");
-              setStartDate(tomorrow);
-              setIsLoading(false);
+      try {
+        const user = firebase.getCurrentUser();
+        await firebase.db
+          .collection("users")
+          .doc(user.uid)
+          .onSnapshot(async (snapshot) => {
+            const scheduled = snapshot.data().scheduled;
+            scheduled.sort(function (a, b) {
+              if (a.date > b.date) {
+                return -1;
+              }
+              if (a.date < b.date) {
+                return 1;
+              }
+              return 0;
             });
-        } catch (error) {
-          console.log(error.message);
-        }
+            setScheduleList(scheduled);
+            setQuery("");
+            setSocial("");
+            setStartDate(tomorrow);
+            setIsLoading(false);
+          });
+      } catch (error) {
+        console.log(error.message);
       }
     })();
-  });
+  }, []);
 
   const onScheduleHandler = async () => {
     try {
@@ -163,29 +161,31 @@ const Schedule = () => {
                 Buscas agendadas
               </h4>
               <Divider />
-              <Table
-                celled
-                columns="4"
-                style={{ width: "90%", margin: "0 5%  20px 5%" }}
-              >
-                <Table.Header>
-                  <Table.Row>
-                    <Table.HeaderCell textAlign="center">
-                      Busca
-                    </Table.HeaderCell>
-                    <Table.HeaderCell textAlign="center">
-                      Rede Social
-                    </Table.HeaderCell>
-                    <Table.HeaderCell textAlign="center">Data</Table.HeaderCell>
-                    <Table.HeaderCell textAlign="center">
-                      Resultados
-                    </Table.HeaderCell>
-                  </Table.Row>
-                </Table.Header>
+              {scheduleList.length > 0 ? (
+                <Table
+                  celled
+                  columns="4"
+                  style={{ width: "90%", margin: "0 5%  20px 5%" }}
+                >
+                  <Table.Header>
+                    <Table.Row>
+                      <Table.HeaderCell textAlign="center">
+                        Busca
+                      </Table.HeaderCell>
+                      <Table.HeaderCell textAlign="center">
+                        Rede Social
+                      </Table.HeaderCell>
+                      <Table.HeaderCell textAlign="center">
+                        Data
+                      </Table.HeaderCell>
+                      <Table.HeaderCell textAlign="center">
+                        Resultados
+                      </Table.HeaderCell>
+                    </Table.Row>
+                  </Table.Header>
 
-                <Table.Body>
-                  {scheduleList &&
-                    scheduleList.map((element, index) => (
+                  <Table.Body>
+                    {scheduleList.map((element, index) => (
                       <Table.Row key={index}>
                         <Table.Cell textAlign="center">
                           {element.query}
@@ -201,8 +201,18 @@ const Schedule = () => {
                         </Table.Cell>
                       </Table.Row>
                     ))}
-                </Table.Body>
-              </Table>
+                  </Table.Body>
+                </Table>
+              ) : (
+                <Message info>
+                  <Message.Header>
+                    Você ainda não agendou nenhuma busca!
+                  </Message.Header>
+                  <p>
+                    <Icon name="calendar" /> Deixe suas buscas agendadas
+                  </p>
+                </Message>
+              )}
             </Segment>
           </Grid.Column>
         </Grid.Row>
