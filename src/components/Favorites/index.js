@@ -7,6 +7,7 @@ import {
   Loader,
   Icon,
   Divider,
+  Message,
 } from "semantic-ui-react";
 
 import firebase from "../../utils/firebase";
@@ -22,6 +23,7 @@ const Favorites = () => {
       }
     })();
   }, [favorites]);
+
   return (
     <div className="main-container">
       <Grid columns={1} padded stackable>
@@ -34,42 +36,54 @@ const Favorites = () => {
               </h3>
               <Divider />
               {favorites ? (
-                <Table
-                  celled
-                  padded
-                  columns="3"
-                  style={{ width: "90%", margin: "0 5%  20px 5%" }}
-                >
-                  <Table.Header>
-                    <Table.Row>
-                      <Table.HeaderCell textAlign="center">
-                        Busca
-                      </Table.HeaderCell>
-                      <Table.HeaderCell textAlign="center">
-                        Rede Social
-                      </Table.HeaderCell>
-                      <Table.HeaderCell textAlign="center">
-                        Opções
-                      </Table.HeaderCell>
-                    </Table.Row>
-                  </Table.Header>
-
-                  <Table.Body>
-                    {favorites.map((element, index) => (
-                      <Table.Row key={index}>
-                        <Table.Cell textAlign="center">
-                          {element.query}
-                        </Table.Cell>
-                        <Table.Cell textAlign="center">
-                          {element.social}
-                        </Table.Cell>
-                        <Table.Cell textAlign="center">
-                          Buscar novamente
-                        </Table.Cell>
+                favorites.length > 0 ? (
+                  <Table
+                    celled
+                    padded
+                    columns="3"
+                    style={{ width: "90%", margin: "0 5%  20px 5%" }}
+                  >
+                    <Table.Header>
+                      <Table.Row>
+                        <Table.HeaderCell textAlign="center">
+                          Busca
+                        </Table.HeaderCell>
+                        <Table.HeaderCell textAlign="center">
+                          Rede Social
+                        </Table.HeaderCell>
+                        <Table.HeaderCell textAlign="center">
+                          Opções
+                        </Table.HeaderCell>
                       </Table.Row>
-                    ))}
-                  </Table.Body>
-                </Table>
+                    </Table.Header>
+
+                    <Table.Body>
+                      {favorites.map((element, index) => (
+                        <Table.Row key={index}>
+                          <Table.Cell textAlign="center">
+                            {element.query}
+                          </Table.Cell>
+                          <Table.Cell textAlign="center">
+                            {element.social}
+                          </Table.Cell>
+                          <Table.Cell textAlign="center">
+                            Buscar novamente
+                          </Table.Cell>
+                        </Table.Row>
+                      ))}
+                    </Table.Body>
+                  </Table>
+                ) : (
+                  <Message info>
+                    <Message.Header>
+                      Você ainda não possui buscas favoritas!
+                    </Message.Header>
+                    <p>
+                      <Icon name="favorite" /> Favorite buscas e as refaça
+                      quando quiser
+                    </p>
+                  </Message>
+                )
               ) : (
                 <Dimmer inverted active>
                   <Loader inverted />
