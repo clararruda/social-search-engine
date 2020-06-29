@@ -1,7 +1,15 @@
 import React, { useState } from "react";
 import ky from "ky";
 import queryString from "query-string";
-import { Button, Dropdown, Loader, Icon } from "semantic-ui-react";
+import {
+  Button,
+  Dropdown,
+  Icon,
+  Grid,
+  Segment,
+  Divider,
+  Message,
+} from "semantic-ui-react";
 import PropTypes from "prop-types";
 import firebase from "../../utils/firebase";
 
@@ -31,7 +39,7 @@ const dropdownOptions = [
 const Search = (props) => {
   const [social, setSocial] = useState(null);
   const [query, setQuery] = useState("");
-  const [result, setResult] = useState([]);
+  const [result, setResult] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [isFavorite, setIsFavorite] = useState(false);
 
@@ -39,7 +47,7 @@ const Search = (props) => {
 
   const onSocialChangeHandler = (event, { value }) => {
     setSocial(value);
-    setResult([]);
+    setResult(null);
   };
 
   const onSubmitHandler = async () => {
@@ -76,62 +84,101 @@ const Search = (props) => {
   };
 
   return (
-    <div id="search-container">
-      <div id="search-navigation">
-        <div className="ui search" style={{ marginRight: "20px" }}>
-          <div className="ui icon input" style={{ width: "500px" }}>
-            <input
-              className="prompt"
-              type="text"
-              placeholder="Palavras-chave"
-              onChange={(event) => {
-                setQuery(event.target.value);
-              }}
-            />
-            <i className="search icon"></i>
-          </div>
-          <div className="results"></div>
-        </div>
+    <div className="main-container">
+      <Grid columns={1} padded stackable>
+        <Grid.Row centered>
+          <Grid.Column width={15}>
+            <Segment raised>
+              <h3 className="title-header">
+                <Icon name="angle right" />
+                Pesquisar
+              </h3>
+              <Divider />
+              <div id="search-navigation">
+                <div className="ui search" style={{ marginRight: "20px" }}>
+                  <div className="ui icon input" style={{ width: "500px" }}>
+                    <input
+                      className="prompt"
+                      type="text"
+                      placeholder="Palavras-chave"
+                      onChange={(event) => {
+                        setQuery(event.target.value);
+                      }}
+                    />
+                    <i className="search icon"></i>
+                  </div>
+                  <div className="results"></div>
+                </div>
 
-        <Dropdown
-          placeholder="Escolha a rede social"
-          selection
-          options={dropdownOptions}
-          value={social}
-          onChange={onSocialChangeHandler}
-          style={{ marginRight: "30px" }}
-        />
+                <Dropdown
+                  placeholder="Escolha a rede social"
+                  selection
+                  options={dropdownOptions}
+                  value={social}
+                  onChange={onSocialChangeHandler}
+                  style={{ marginRight: "30px" }}
+                />
 
-        <Button
-          primary
-          onClick={onSubmitHandler}
-          disabled={social === null || query.length === 0}
-          style={{ marginRight: "30px" }}
-        >
-          Buscar
-        </Button>
-        {plan === "pro" && (
-          <Button
-            onClick={addFavoriteHandler}
-            color="red"
-            disabled={
-              social === null ||
-              query.length === 0 ||
-              result.length === 0 ||
-              isFavorite
-            }
-            style={{ marginRight: "30px" }}
-          >
-            <Icon name="heart" />
-            <span>Favoritar busca</span>
-          </Button>
-        )}
-      </div>
-      {!isLoading ? (
-        result.length !== 0 && <SearchResult data={result} social={social} />
-      ) : (
-        <Loader content="Buscando" active />
-      )}
+                <Button
+                  primary
+                  onClick={onSubmitHandler}
+                  disabled={social === null || query.length === 0 || isLoading}
+                  style={{ marginRight: "30px" }}
+                >
+                  Buscar
+                </Button>
+                {plan === "pro" && (
+                  <Button
+                    onClick={addFavoriteHandler}
+                    color="red"
+                    disabled={
+                      social === null ||
+                      query.length === 0 ||
+                      result === null ||
+                      result.length === 0 ||
+                      isFavorite ||
+                      isLoading
+                    }
+                    style={{ marginRight: "30px" }}
+                  >
+                    <Icon name="heart" />
+                    <span>Favoritar</span>
+                  </Button>
+                )}
+              </div>
+            </Segment>
+          </Grid.Column>
+        </Grid.Row>
+        <Grid.Row>
+          {!isLoading ? (
+            result !== null && result.length !== 0 ? (
+              <SearchResult data={result} social={social} />
+            ) : (
+              <Message
+                info
+                hidden={result === null}
+                style={{ width: "92%", margin: "0 4%" }}
+              >
+                <Message.Header>
+                  Não há resultados para a sua busca
+                </Message.Header>
+                <p>Tente novamente depois ou tente outras palavras chave!</p>
+              </Message>
+            )
+          ) : (
+            <Message
+              style={{ width: "92%", margin: "0 4%", textAlign: "center" }}
+            >
+              <Message.Content>
+                <Icon name="circle notched" loading size="large" />
+                <Message.Header style={{ marginTop: "10px" }}>
+                  Buscando
+                </Message.Header>
+              </Message.Content>
+            </Message>
+          )}
+        </Grid.Row>
+      </Grid>
     </div>
   );
 };

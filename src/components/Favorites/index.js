@@ -1,5 +1,13 @@
 import React, { useState, useEffect } from "react";
-import { Table, Segment, Grid, Dimmer, Loader } from "semantic-ui-react";
+import {
+  Table,
+  Segment,
+  Grid,
+  Dimmer,
+  Loader,
+  Icon,
+  Divider,
+} from "semantic-ui-react";
 
 import firebase from "../../utils/firebase";
 
@@ -20,15 +28,11 @@ const Favorites = () => {
         <Grid.Row centered>
           <Grid.Column width={14}>
             <Segment raised>
-              <h3
-                style={{
-                  textAlign: "center",
-                  marginBottom: "40px",
-                  marginTop: "20px",
-                }}
-              >
+              <h3 className="title-header">
+                <Icon name="angle right" />
                 Buscas favoritas
               </h3>
+              <Divider />
               {favorites ? (
                 <Table
                   celled

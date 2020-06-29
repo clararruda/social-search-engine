@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Header, Table, Segment, Grid } from "semantic-ui-react";
+import { Header, Table, Segment, Grid, Divider, Icon } from "semantic-ui-react";
 import { Pie } from "react-chartjs-2";
 
 import firebase from "../../utils/firebase";
@@ -27,19 +27,14 @@ const Ranking = () => {
           <Grid.Column width={11}>
             <Segment raised>
               <div id="ranking-table">
-                <h3
-                  style={{
-                    textAlign: "center",
-                    marginBottom: "40px",
-                    marginTop: "20px",
-                  }}
-                >
+                <h4 className="title-header">
+                  <Icon name="angle right" />
                   Ranking de buscas por palavras chave
-                </h3>
+                </h4>
+                <Divider />
                 {keywordsRanking.length !== 0 && (
                   <Table
                     celled
-                    padded
                     columns="4"
                     verticalAlign="middle"
                     style={{ width: "90%", margin: "0 5%  20px 5%" }}
@@ -86,17 +81,13 @@ const Ranking = () => {
             </Segment>
           </Grid.Column>
           <Grid.Column width={5}>
-            <Segment raised style={{ height: "360px" }}>
+            <Segment raised style={{ height: "300px" }}>
               <div id="pie-chart">
-                <h3
-                  style={{
-                    textAlign: "center",
-                    marginTop: "20px",
-                    marginBottom: "40px",
-                  }}
-                >
+                <h4 className="title-header">
+                  <Icon name="angle right" />
                   Ranking de buscas por rede social
-                </h3>
+                </h4>
+                <Divider />
                 {socialRanking.length !== 0 && (
                   <Pie
                     data={{

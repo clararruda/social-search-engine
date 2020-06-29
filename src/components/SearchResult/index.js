@@ -198,7 +198,9 @@ const SearchResult = (props) => {
   const { data, social } = props;
   return (
     <div id="search-result">
-      <Card.Group>{templates[social](data)}</Card.Group>
+      <Card.Group stackable itemsPerRow={4} centered>
+        {templates[social](data)}
+      </Card.Group>
     </div>
   );
 };

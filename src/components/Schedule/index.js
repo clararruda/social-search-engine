@@ -8,6 +8,8 @@ import {
   Table,
   Dimmer,
   Loader,
+  Icon,
+  Divider,
 } from "semantic-ui-react";
 
 import "react-datepicker/dist/react-datepicker.css";
@@ -96,15 +98,11 @@ const Schedule = () => {
         <Grid.Row>
           <Grid.Column width={4}>
             <Segment raised>
-              <h3
-                style={{
-                  textAlign: "center",
-                  marginBottom: "40px",
-                  marginTop: "20px",
-                }}
-              >
+              <h4 className="title-header">
+                <Icon name="angle right" />
                 Agendar buscas
-              </h3>
+              </h4>
+              <Divider />
               <div className="schedule-form">
                 <Form>
                   <Form.Input
@@ -160,18 +158,13 @@ const Schedule = () => {
 
           <Grid.Column width={12}>
             <Segment raised>
-              <h3
-                style={{
-                  textAlign: "center",
-                  marginBottom: "40px",
-                  marginTop: "20px",
-                }}
-              >
+              <h4 className="title-header">
+                <Icon name="angle right" />
                 Buscas agendadas
-              </h3>
+              </h4>
+              <Divider />
               <Table
                 celled
-                padded
                 columns="4"
                 style={{ width: "90%", margin: "0 5%  20px 5%" }}
               >
